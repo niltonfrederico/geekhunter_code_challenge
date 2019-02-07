@@ -1,4 +1,4 @@
-WORKSPACE_CONTAINER=app_backend
+WORKSPACE_CONTAINER=abundantia_app
 
 help: ## make [target]
 	@echo ""
@@ -15,28 +15,28 @@ install-dependencies: ## Install composer dependencies
 
 build: copy-keys install-dependencies ## Build Docker image for tests
 	@echo "--> Build Docker image for tests."
-	docker-compose --file docker/docker-compose.yml build
+	docker-compose --file docker/development/docker-compose.yml build
 
 build-no-cache: copy-keys install-dependencies ## Build docker image without cache
 	@echo "--> Build Docker image for tests."
-	docker-compose --file docker/docker-compose.yml build --no-cache
+	docker-compose --file docker/development/docker-compose.yml build --no-cache
 
 up: ## Up docker containers
 	@echo "--> Docker up."
-	docker-compose --file docker/docker-compose.yml up -d
+	docker-compose --file docker/development/docker-compose.yml up -d
 
 stop: ## Stop all containers
 	@echo "--> Docker stop."
-	docker-compose --file docker/docker-compose.yml stop
+	docker-compose --file docker/development/docker-compose.yml stop
 
 up-no-cache: # Up docker containers from zero
 	@echo "--> Docker up."
-	docker-compose --file docker/docker-compose.yml up --force-recreate
+	docker-compose --file docker/development/docker-compose.yml up --force-recreate
 
 test: ## Run all tests (pytest) inside docker.
 	@echo "--> Testing on Docker."
-	docker-compose --file docker/docker-compose.yml run --rm test py.test -s --cov-report term --cov-report html
+	docker-compose --file docker/development/docker-compose.yml run --rm test py.test -s --cov-report term --cov-report html
 
 bash: ## Run bash for container.
 	@echo "--> Starting bash"
-	docker-compose --file docker/docker-compose.yml run --rm $(WORKSPACE_CONTAINER) bash
+	docker-compose --file docker/development/docker-compose.yml run --rm $(WORKSPACE_CONTAINER) bash

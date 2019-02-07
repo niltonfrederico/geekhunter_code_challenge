@@ -1,6 +1,6 @@
 version: "3"
 services:
-  abundantia_app:
+  abundantia_mysql:
     container_name: abundantia-dev-app
     image: mysql:5.7
     ports:
@@ -12,12 +12,12 @@ services:
       - data-volume:/var/lib/mysql
     command:
       mysqld --sql_mode=""
-  abundantia_mysql:
+  abundantia_app:
     container_name: abundantia-dev-mysql
     build:
-      context: ../
-      dockerfile: docker/Dockerfile
-    command: /bin/bash -c "dockerize -wait tcp://subscription_core_redis:6379 -wait tcp://subscription-core-minio:9000 -wait tcp://abundantia_app:3306 && python manage.py runserver_plus 0.0.0.0:8000"
+      context: ../../
+      dockerfile: docker/development/Dockerfile
+    command: /bin/bash -c "dockerize -wait tcp://abundantia_mysql:3306 && python manage.py runserver_plus 0.0.0.0:8000"
     environment:
       - PYTHONUNBUFFERED=0
     volumes:
@@ -26,9 +26,9 @@ services:
       - "8000:8000"
       - "5555:5555"
     links:
-      - abundantia_app
+      - abundantia_mysql
     depends_on:
-      - abundantia_app
+      - abundantia_mysql
 volumes:
   data-volume:
   s3-folder:
