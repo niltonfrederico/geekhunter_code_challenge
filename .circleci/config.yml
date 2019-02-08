@@ -45,7 +45,7 @@ jobs:
           name: run tests
           command: |
             . venv/bin/activate
-            py.test -s --durations=0 -n 2 --no-migrations
+            py.test -s --durations=0 --no-migrations
 
       - store_artifacts:
           path: test-reports
