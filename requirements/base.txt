@@ -4,3 +4,4 @@ djangorestframework==3.9.1
 django-environ==0.4.5
 celery==4.2.0
 requests==2.21.0
+mysqlclient==1.4.1
