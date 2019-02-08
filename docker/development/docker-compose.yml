@@ -1,0 +1,34 @@
+version: "3"
+services:
+  abundantia_mysql:
+    container_name: abundantia-dev-mysql
+    image: mysql:5.7
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=password
+      - MYSQL_DATABASE=abundantia
+    volumes:
+      - data-volume:/var/lib/mysql
+    command:
+      mysqld --sql_mode=""
+  abundantia_app:
+    container_name: abundantia-dev-app
+    build:
+      context: ../../
+      dockerfile: docker/development/Dockerfile
+    command: /bin/bash -c "dockerize -wait tcp://abundantia_mysql:3306 && python manage.py runserver_plus 0.0.0.0:8000"
+    environment:
+      - PYTHONUNBUFFERED=0
+    volumes:
+      - ../:/code/
+    ports:
+      - "8000:8000"
+      - "5555:5555"
+    links:
+      - abundantia_mysql
+    depends_on:
+      - abundantia_mysql
+volumes:
+  data-volume:
+  s3-folder:
