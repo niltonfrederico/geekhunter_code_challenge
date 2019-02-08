@@ -1,0 +1,52 @@
+# Python CircleCI 2.0 configuration file
+#
+# Check https://circleci.com/docs/2.0/language-python/ for more details
+#
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/python:3.6.1
+          environment:
+            - DATABASE_URL=mysql://root:password@127.0.0.1:3306/abundantia
+      - image: mysql:5.7
+          command:
+            mysqld --sql_mode=""
+          environment:
+            - MYSQL_ROOT_HOST=%
+            - MYSQL_ROOT_PASSWORD=password
+            - MYSQL_DATABASE=abundantia
+
+    working_directory: ~/repo
+
+    steps:
+      - checkout
+
+      # Download and cache dependencies
+      - restore_cache:
+          keys:
+          - v1-dependencies-{{ checksum "requirements/base.txt" }}-{{ checksum "requirements/development.txt" }}
+
+      - run:
+          name: install dependencies
+          command: |
+            python3 -m venv venv
+            . venv/bin/activate
+            pip install -r requirements/development.txt
+            pip install -e .
+
+      - save_cache:
+          paths:
+            - ./venv
+          key: v1-dependencies-{{ checksum "requirements/base.txt" }}-{{ checksum "requirements/development.txt" }}
+
+      # run tests!
+      - run:
+          name: run tests
+          command: |
+            . venv/bin/activate
+            py.test -s --durations=0 -n 2 --no-migrations
+
+      - store_artifacts:
+          path: test-reports
+          destination: test-reports
