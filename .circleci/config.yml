@@ -7,15 +7,15 @@ jobs:
   build:
     docker:
       - image: circleci/python:3.6.1
-          environment:
-            - DATABASE_URL=mysql://root:password@127.0.0.1:3306/abundantia
+        environment:
+          - DATABASE_URL=mysql://root:password@127.0.0.1:3306/abundantia
       - image: mysql:5.7
-          command:
-            mysqld --sql_mode=""
-          environment:
-            - MYSQL_ROOT_HOST=%
-            - MYSQL_ROOT_PASSWORD=password
-            - MYSQL_DATABASE=abundantia
+        command:
+          mysqld --sql_mode=""
+        environment:
+          - MYSQL_ROOT_HOST=%
+          - MYSQL_ROOT_PASSWORD=password
+          - MYSQL_DATABASE=abundantia
 
     working_directory: ~/repo
 
