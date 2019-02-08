@@ -2,12 +2,12 @@ from django.db import models
 
 from model_utils.choices import Choices
 
-from abundantia.common.models import BaseModel
+from abundantia_api.common.models import BaseModel
 
 
 class Currency(BaseModel):
 
-    code = models.CharField(max_length=True, unique=True)
+    code = models.CharField(max_length=3, unique=True)
     name = models.CharField(max_length=16)
     is_active = models.BooleanField(default=True)
 

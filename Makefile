@@ -21,7 +21,7 @@ build-no-cache: copy-keys install-dependencies ## Build docker image without cac
 	@echo "--> Build Docker image for tests."
 	docker-compose --file docker/development/docker-compose.yml build --no-cache
 
-up: ## Up docker containers
+up: copy-keys ## Up docker containers
 	@echo "--> Docker up."
 	docker-compose --file docker/development/docker-compose.yml up -d
 
