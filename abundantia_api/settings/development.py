@@ -1,5 +1,7 @@
 from .base import *
 
+INSTALLED_APPS = INSTALLED_APPS + ["django_extensions"]
+
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = "c@vc)dkhlqrutz3y$1y!7^1t_()a(y@$n3z-g@kgw_e$%=goq&"
 

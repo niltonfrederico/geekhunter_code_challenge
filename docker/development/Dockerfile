@@ -33,7 +33,3 @@ ADD ./README.md /code/README.md
 RUN mkdir src
 
 RUN pip install -e .
-
-ADD ./docker/development/docker-entrypoint.sh /tmp/development/docker-entrypoint.sh
-
-ENTRYPOINT ["bash", "/tmp/docker-entrypoint.sh"]

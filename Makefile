@@ -9,15 +9,11 @@ copy-keys: # Copy your ssh keys for third party purposes
 	mkdir -p .keys
 	cp ~/.ssh/id_rsa ./.keys/id_rsa
 
-install-dependencies: ## Install composer dependencies
-	@echo "--> Installing composer dependencies locally"
-	composer install -v
-
-build: copy-keys install-dependencies ## Build Docker image for tests
+build: copy-keys ## Build Docker image for tests
 	@echo "--> Build Docker image for tests."
 	docker-compose --file docker/development/docker-compose.yml build
 
-build-no-cache: copy-keys install-dependencies ## Build docker image without cache
+build-no-cache: copy-keys ## Build docker image without cache
 	@echo "--> Build Docker image for tests."
 	docker-compose --file docker/development/docker-compose.yml build --no-cache
 
@@ -39,4 +35,12 @@ test: ## Run all tests (pytest) inside docker.
 
 bash: ## Run bash for container.
 	@echo "--> Starting bash"
-	docker-compose --file docker/development/docker-compose.yml run --rm $(WORKSPACE_CONTAINER) bash
+	docker-compose --file docker/development/docker-compose.yml run --rm $(WORKSPACE_CONTAINER) /bin/bash
+
+migrate: ## manage.py makemigrations.
+	@echo "--> Migrating..."
+	docker-compose --file docker/development/docker-compose.yml run --rm $(WORKSPACE_CONTAINER) /bin/bash -c "dockerize -wait tcp://vitaminas-db:3306 && python manage.py migrate"
+
+makemigrations: ## manage.py migrate.
+	@echo "--> Creating migrations..."
+	docker-compose --file docker/development/docker-compose.yml run --rm $(WORKSPACE_CONTAINER) python manage.py makemigrations
