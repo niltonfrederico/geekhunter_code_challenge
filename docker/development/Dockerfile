@@ -22,9 +22,6 @@ RUN echo "Host github.com\n\tStrictHostKeyChecking no\n" >> ${HOME}/.ssh/config
 
 RUN mkdir -p /code/requirements/
 
-ADD ./requirements/setup.txt /code/requirements/setup.txt
-RUN pip install -r /code/requirements/setup.txt
-
 ADD ./requirements/base.txt /code/requirements/base.txt
 RUN pip install -r /code/requirements/base.txt
 
@@ -36,7 +33,3 @@ ADD ./README.md /code/README.md
 RUN mkdir src
 
 RUN pip install -e .
-
-ADD ./docker/docker-entrypoint.sh /tmp/docker-entrypoint.sh
-
-ENTRYPOINT ["bash", "/tmp/docker-entrypoint.sh"]
