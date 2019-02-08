@@ -24,4 +24,3 @@ def test_quotations_create():
 
     assert quotation
     assert Quotation.objects.all().count() == 1
-
