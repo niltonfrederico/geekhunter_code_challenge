@@ -106,3 +106,7 @@ USE_TZ = True
 REST_FRAMEWORK = {
     "DEFAULT_FILTER_BACKENDS": ("django_filters.rest_framework.DjangoFilterBackend",)
 }
+
+
+# HGBRASIL API
+HGBRASIL_API_TOKEN = env.str("HGBRASIL_API_TOKEN", default="")

@@ -11,3 +11,6 @@ DEBUG = True
 DATABASES = {
     "default": env.db(default="mysql://root:password@abundantia_mysql:3306/abundantia")
 }
+
+# HGBRASIL API
+HGBRASIL_API_TOKEN = env.str("HGBRASIL_API_TOKEN", default="1cd8e6f4")
