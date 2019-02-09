@@ -27,6 +27,9 @@ class BaseClient:
 
 
 class BaseBackend:
+
+    id = "base"
+
     def _get_currencies(self):
         currency_queryset = Currency.objects.active()
 

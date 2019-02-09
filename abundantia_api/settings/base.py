@@ -107,6 +107,10 @@ REST_FRAMEWORK = {
     "DEFAULT_FILTER_BACKENDS": ("django_filters.rest_framework.DjangoFilterBackend",)
 }
 
+# CURRENCY BACKENDS
+CURRENCY_QUOTATIONS_BACKENDS = [
+    "abundantia_api.currency.backends.hgbrasil.backends.HGBrasilBackend"
+]
 
 # HGBRASIL API
 HGBRASIL_API_TOKEN = env.str("HGBRASIL_API_TOKEN", default="")
