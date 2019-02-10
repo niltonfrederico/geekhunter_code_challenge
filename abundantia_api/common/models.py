@@ -7,7 +7,7 @@ from .managers import BaseManager
 
 class BaseModel(TimeStampedModel):
 
-    objects = BaseManager
+    objects = BaseManager()
 
     class Meta:
         abstract = True
