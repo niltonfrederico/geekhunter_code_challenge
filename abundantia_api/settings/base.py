@@ -38,8 +38,6 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.middleware.common.CommonMiddleware",
-    "django.contrib.auth.middleware.AuthenticationMiddleware",
-    "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
@@ -61,7 +59,7 @@ TEMPLATES = [
     }
 ]
 
-WSGI_APPLICATION = "abundantia._apiwsgi.application"
+WSGI_APPLICATION = "abundantia_api.wsgi.application"
 
 
 # Database
@@ -114,4 +112,4 @@ CURRENCY_QUOTATIONS_BACKENDS = [
 
 # HGBRASIL API
 HGBRASIL_API_URL = env.str("HGBRASIL_API_URL", default="https://api.hgbrasil.com/{}")
-HGBRASIL_API_TOKEN = env.str("HGBRASIL_API_TOKEN", default="1cd8e6f4")
+HGBRASIL_API_TOKEN = env.str("HGBRASIL_API_TOKEN", default="")
