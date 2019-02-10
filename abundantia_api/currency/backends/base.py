@@ -18,7 +18,7 @@ class BaseClient:
         return requests.TooManyRedirects, requests.ConnectionError, requests.Timeout
 
     def build_url(self, endpoint):
-        url = self.base_url.format(f"{endpoint}&key={self.token}")
+        url = self.base_url.format(f"{endpoint}?key={self.token}")
         return url
 
     def get(self, url):

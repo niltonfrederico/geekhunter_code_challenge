@@ -37,6 +37,7 @@ bash: ## Run bash for container.
 	@echo "--> Starting bash"
 	docker-compose --file docker/development/docker-compose.yml run --rm $(WORKSPACE_CONTAINER) /bin/bash
 
+
 migrate: ## manage.py makemigrations.
 	@echo "--> Migrating..."
 	docker-compose --file docker/development/docker-compose.yml run --rm $(WORKSPACE_CONTAINER) /bin/bash -c "dockerize -wait tcp://vitaminas-db:3306 && python manage.py migrate"

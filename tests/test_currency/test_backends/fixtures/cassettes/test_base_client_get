@@ -1,0 +1,33 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      User-Agent: [python-requests/2.21.0]
+    method: GET
+    uri: https://reqres.in/api/users?key=123456
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAA6TOTWrDMBAF4LvMWljY7qJoWSiFXqCLUsKLPZEVJI+QJg4k5O6FuBBwl9kM88Pw
+        vStleCbXGspcduvQG1JRRHJt99feL5Xci6ERCnLfVwrj/e8QStXdjMTk6IOleCZDEY/lWzzpRIaw
+        QFHI0aSaq7O29g0SLjLjXJtBkj2FAwaudq16Dqpc7IDIe/Ejz7btXptj9nQzq99t/E/MrBv+i7Fw
+        ecI/SuU8VeXwP0C/CfCeEra+zP4JXSL7LF5G8PLgf26/AAAA//8DAPTpTVu7AQAA
+    headers:
+      Access-Control-Allow-Origin: ['*']
+      CF-RAY: [4a721115f91f5687-IAD]
+      Connection: [keep-alive]
+      Content-Encoding: [gzip]
+      Content-Type: [application/json; charset=utf-8]
+      Date: ['Sun, 10 Feb 2019 22:38:34 GMT']
+      ETag: [W/"1bb-D+c3sZ5g5u/nmLPQRl1uVo2heAo"]
+      Expect-CT: ['max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"']
+      Server: [cloudflare]
+      Set-Cookie: ['__cfduid=d08d3065e7b7ba4fc64620dc683cde1581549838313; expires=Mon,
+          10-Feb-20 22:38:33 GMT; path=/; domain=.reqres.in; HttpOnly']
+      Transfer-Encoding: [chunked]
+      X-Powered-By: [Express]
+    status: {code: 200, message: OK}
+version: 1
