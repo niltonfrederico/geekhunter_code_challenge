@@ -1,4 +1,4 @@
-from rest_framework.viewsets import ViewSet
+from rest_framework import viewsets
 
 
 class MultiSerializerMixin(object):
@@ -8,5 +8,5 @@ class MultiSerializerMixin(object):
         return self.serializers.get(self.action, self.serializers["default"])
 
 
-class BaseViewSet(MultiSerializerMixin, ViewSet):
+class BaseViewSet(MultiSerializerMixin, viewsets.ModelViewSet):
     pass

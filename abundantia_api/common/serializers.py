@@ -13,4 +13,11 @@ class BaseReadSerializer(ModelSerializer):
 
 
 class BaseWriteSerializer(ModelSerializer):
-    pass
+    def get_field_names(self, declared_fields, info):
+        fields = super().get_field_names(declared_fields, info)
+
+        if fields:
+            common_fields = ["id", "created", "modified"]
+            fields = list(set(fields) - set(common_fields))
+            fields.extend(common_fields)
+        return fields
