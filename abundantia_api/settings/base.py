@@ -31,7 +31,7 @@ ALLOWED_HOSTS = ["*"]
 INSTALLED_APPS = [
     "django.contrib.auth",
     "django.contrib.contenttypes",
-    "django.contrib.messages",
+    "rest_framework",
     "abundantia_api.currency.apps.CurrencyConfig",
 ]
 
@@ -102,8 +102,14 @@ USE_TZ = True
 
 # REST FRAMEWORK
 REST_FRAMEWORK = {
-    "DEFAULT_FILTER_BACKENDS": ("django_filters.rest_framework.DjangoFilterBackend",)
+    "DEFAULT_VERSIONING_CLASS": "rest_framework.versioning.URLPathVersioning",
+    "DEFAULT_FILTER_BACKENDS": (
+        "django_filters.rest_framework.DjangoFilterBackend",
+        "rest_framework.filters.OrderingFilter",
+    ),
+    "DEFAULT_RENDERER_CLASSES": ("rest_framework.renderers.JSONRenderer",),
 }
+
 
 # CURRENCY BACKENDS
 CURRENCY_QUOTATIONS_BACKENDS = [

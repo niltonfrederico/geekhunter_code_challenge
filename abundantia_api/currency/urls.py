@@ -1,7 +1,7 @@
-from rest_framework.routers import DefaultRouter
+from rest_framework_extensions.routers import ExtendedDefaultRouter
 
 from .resources import CurrencyViewSet
 
-router = DefaultRouter()
+router = ExtendedDefaultRouter()
 
 router.register("", CurrencyViewSet, basename="currencies")
