@@ -9,6 +9,23 @@ from .models import Currency
 
 
 class CurrencyViewSet(BaseViewSet):
+    """
+    retrieve:
+    Returns information on a given existing currency.
+
+    list:
+    Return a list of all the existing currencies.
+
+    create:
+    Create a new currency instance.
+
+    update:
+    Updates a new currency instance.
+
+    quotations:
+    Returns information on a given existing currency with its quotations.
+    """
+
     serializers = {
         "default": CurrencyReadSerializer,
         "quotations": CurrencyWithQuotationSerializer,
