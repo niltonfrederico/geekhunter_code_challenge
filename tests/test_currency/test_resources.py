@@ -23,7 +23,14 @@ def test_currency_create(api_client):
 
     assert_that(
         response.data,
-        has_entries({"code": "TST", "name": "Currency", "is_active": True}),
+        has_entries(
+            {
+                "code": "TST",
+                "name": "Currency",
+                "is_active": True,
+                "is_cryptocurrency": False,
+            }
+        ),
     )
 
 
@@ -74,6 +81,7 @@ def test_currency_get(api_client):
                 "code": currency.code,
                 "name": currency.name,
                 "is_active": currency.is_active,
+                "is_cryptocurrency": False,
             }
         ),
     )
@@ -93,6 +101,12 @@ def test_currency_update(api_client):
     assert_that(
         response.data,
         has_entries(
-            {"id": currency.id, "code": "TST", "name": "updated", "is_active": False}
+            {
+                "id": currency.id,
+                "code": "TST",
+                "name": "updated",
+                "is_active": False,
+                "is_cryptocurrency": False,
+            }
         ),
     )

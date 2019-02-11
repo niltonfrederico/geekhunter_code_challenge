@@ -41,6 +41,6 @@ migrate: ## manage.py makemigrations.
 	@echo "--> Migrating..."
 	docker-compose --file docker/development/docker-compose.yml run --rm $(WORKSPACE_CONTAINER) /bin/bash -c "dockerize -wait tcp://abundantia_mysql:3306 && python manage.py migrate"
 
-makemigrations: ## manage.py migrate.
+migrations: ## manage.py migrate.
 	@echo "--> Creating migrations..."
 	docker-compose --file docker/development/docker-compose.yml run --rm $(WORKSPACE_CONTAINER) python manage.py makemigrations
