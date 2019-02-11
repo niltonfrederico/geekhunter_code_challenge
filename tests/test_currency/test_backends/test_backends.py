@@ -49,6 +49,7 @@ def test_backend_update_simple():
     assert quotation.variation == Decimal("0.0460")
 
 
+@client_vcr.use_cassette()
 def test_backend_update_with_no_currency():
     backend_class = QuotationsBackendManager.get_backend("hgbrasil")
     backend = backend_class()
@@ -60,6 +61,7 @@ def test_backend_update_with_no_currency():
     assert quotations_queryset.count() == 0
 
 
+@client_vcr.use_cassette()
 def test_backend_update_inactivated_items():
     active_currency = AutoFixture(
         Currency, {"code": "USD", "name": "Dollar"}
