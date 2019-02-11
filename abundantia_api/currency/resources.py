@@ -23,5 +23,6 @@ class CurrencyViewSet(BaseViewSet):
     @detail_route(methods=["get"], url_path="quotations")
     def quotations(self, request, pk=None, **kwargs):
         currency = self.get_object()
-        serializer = self.get_serializer()
+        context = self.get_serializer_context()
+        serializer = self.get_serializer(instance=currency, context=context)
         return Response(serializer.data)
