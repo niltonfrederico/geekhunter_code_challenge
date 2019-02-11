@@ -1,6 +1,9 @@
 from abundantia_api.common.serializers import BaseReadSerializer
 
+from .models import Currency
+
 
 class CurrencyReadSerializer(BaseReadSerializer):
     class Meta:
-        fields = ["code", "name", "is_active"]
+        model = Currency
+        fields = ["code", "name", "is_active", "is_cryptocurrency"]

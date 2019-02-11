@@ -16,3 +16,4 @@ black==18.9b0
 vcrpy==2.0.1
 pyyaml==3.13
 responses==0.10.5
+Werkzeug==0.14.1

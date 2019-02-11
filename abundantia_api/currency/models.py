@@ -10,6 +10,10 @@ class Currency(BaseModel):
     code = models.CharField(max_length=3, unique=True)
     name = models.CharField(max_length=16)
     is_active = models.BooleanField(default=True)
+    is_cryptocurrency = models.BooleanField(default=False)
+
+    def __str__(self):
+        return f"({self.id}) {self.code}"
 
 
 class Quotation(BaseModel):

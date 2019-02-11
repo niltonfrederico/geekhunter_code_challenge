@@ -9,3 +9,4 @@ class CurrencyViewSet(BaseViewSet):
     serializers = {"default": CurrencyReadSerializer}
 
     queryset = Currency.objects.all()
+    http_method_names = ["get", "put", "post"]

@@ -1,5 +1,7 @@
 from django.conf import settings
 
+from abundantia_api.common.exceptions import ClientHttpException
+
 from ..base import BaseClient
 
 
@@ -17,4 +19,9 @@ class HGBrasilClient(BaseClient):
             "finance?array_limit=1&fields=only_results,bitcoin,currencies"
         )
 
-        return self.get(endpoint)
+        response = self.get(endpoint)
+
+        if response.status_code not in range(200, 299):
+            raise ClientHttpException
+
+        return response.json()

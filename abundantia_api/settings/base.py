@@ -31,15 +31,13 @@ ALLOWED_HOSTS = ["*"]
 INSTALLED_APPS = [
     "django.contrib.auth",
     "django.contrib.contenttypes",
-    "django.contrib.messages",
+    "rest_framework",
     "abundantia_api.currency.apps.CurrencyConfig",
 ]
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.middleware.common.CommonMiddleware",
-    "django.contrib.auth.middleware.AuthenticationMiddleware",
-    "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
@@ -61,7 +59,7 @@ TEMPLATES = [
     }
 ]
 
-WSGI_APPLICATION = "abundantia._apiwsgi.application"
+WSGI_APPLICATION = "abundantia_api.wsgi.application"
 
 
 # Database
@@ -104,8 +102,16 @@ USE_TZ = True
 
 # REST FRAMEWORK
 REST_FRAMEWORK = {
-    "DEFAULT_FILTER_BACKENDS": ("django_filters.rest_framework.DjangoFilterBackend",)
+    "DEFAULT_VERSIONING_CLASS": "rest_framework.versioning.URLPathVersioning",
+    "DEFAULT_FILTER_BACKENDS": (
+        "django_filters.rest_framework.DjangoFilterBackend",
+        "rest_framework.filters.OrderingFilter",
+    ),
+    "DEFAULT_RENDERER_CLASSES": ("rest_framework.renderers.JSONRenderer",),
+    "PAGE_SIZE": 100,
+    "DEFAULT_PAGINATION_CLASS": "abundantia_api.common.pagination.LimitOffsetRelativePathPagination",
 }
+
 
 # CURRENCY BACKENDS
 CURRENCY_QUOTATIONS_BACKENDS = [
@@ -114,4 +120,4 @@ CURRENCY_QUOTATIONS_BACKENDS = [
 
 # HGBRASIL API
 HGBRASIL_API_URL = env.str("HGBRASIL_API_URL", default="https://api.hgbrasil.com/{}")
-HGBRASIL_API_TOKEN = env.str("HGBRASIL_API_TOKEN", default="1cd8e6f4")
+HGBRASIL_API_TOKEN = env.str("HGBRASIL_API_TOKEN", default="")
