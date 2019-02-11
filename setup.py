@@ -16,7 +16,7 @@ setup_requires = [str(ir.req) for ir in setup_requires]
 
 setup(
     name="abundantia-api",
-    version="0.1",
+    version="1.0.0",
     author="Nilton Teixeira",
     author_email="niltonfrederico@gmail.com",
     url="",
