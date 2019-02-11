@@ -52,8 +52,8 @@ def test_backend_update_simple():
     quotation = quotations_queryset.first()
 
     assert quotation.currency_id == currency.id
-    assert quotation.amount == "3.7357"
-    assert quotation.variation == "0.0460"
+    assert str(quotation.amount) == "3.7357"
+    assert str(quotation.variation) == "0.0460"
 
 
 @client_vcr.use_cassette()
@@ -95,5 +95,5 @@ def test_backend_update_inactivated_items():
     quotation = quotations_queryset.first()
 
     assert quotation.currency_id == active_currency.id
-    assert quotation.amount == "3.7356"
-    assert quotation.variation == "0.0430"
+    assert str(quotation.amount) == "3.7356"
+    assert str(quotation.variation) == "0.0430"
