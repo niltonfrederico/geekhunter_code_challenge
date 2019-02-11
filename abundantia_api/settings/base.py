@@ -12,6 +12,9 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 
 import os
 import environ
+from datetime import timedelta
+from celery.schedules import crontab
+from urllib.parse import quote
 
 env = environ.Env()
 root = environ.Path(__file__) - 3
