@@ -110,3 +110,47 @@ def test_currency_update(api_client):
             }
         ),
     )
+
+
+def test_read_currency_with_quotations_serializer(api_client):
+    quotation = AutoFixture(
+        Quotation,
+        field_values={"amount": 10.5001, "variation": 0.0001},
+        generate_fk=True,
+    ).create_one()
+    currency = quotation.currency
+
+    url = reverse("currencies:currencies-quotations", kwargs={"pk": currency.id})
+
+    response = api_client.get(url)
+
+    assert response.status_code == 200
+
+    data = response.data
+
+    assert_that(
+        data,
+        has_entries(
+            {
+                "id": currency.id,
+                "name": currency.name,
+                "code": currency.code,
+                "is_active": currency.is_active,
+            }
+        ),
+    )
+
+    first_quotation = data.get("quotations")[0]
+
+    assert_that(
+        first_quotation,
+        has_entries(
+            {
+                "id": quotation.id,
+                "name": quotation.currency.name,
+                "code": quotation.currency.code,
+                "amount": str(quotation.amount),
+                "variation": str(quotation.variation),
+            }
+        ),
+    )
