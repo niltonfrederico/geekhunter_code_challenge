@@ -21,16 +21,13 @@ CELERY_BROKER_URL = env.str(
 CELERY_RESULT_BACKEND = env.str(
     "CELERY_RESULT_BACKEND", default="redis://abundantia_redis:6379/1"
 )
-CELERY_BEAT_SCHEDULE = {}
+CELERY_BEAT_SCHEDULE = {
+    "currency-fetch-data": {
+        "task": "abundantia_api.currency.taskss",
+        "schedule": crontab(hour="*/1", minute=0),
+    }
+}
 
 # HGBRASIL API
 HGBRASIL_API_URL = env.str("HGBRASIL_API_URL", default="https://api.hgbrasil.com/{}")
 HGBRASIL_API_TOKEN = env.str("HGBRASIL_API_TOKEN", default="1cd8e6f4")
-
-# Schedule
-CELERY_BEAT_SCHEDULE = {
-    "currency-fetch-data": {
-        "task": "abundantia_api.currency.tasks.task_update_all_currencies_quotations",
-        "schedule": crontab(hour="*/1", minute="0"),
-    }
-}

@@ -22,5 +22,6 @@ logger = logging.getLogger(__name__)
 def task_update_all_currencies_quotations(self):
     backends = QuotationsBackendManager.get_backends()
 
-    for backend in backends:
+    for backend_class in backends:
+        backend = backend_class()
         backend.update()

@@ -16,22 +16,21 @@ DATABASES = {
 }
 
 # CELERY
-CELERY_BROKER_URL = env.str(
-    "CELERY_BROKER_URL", default="redis://abundantia_redis:6379/0"
-)
-CELERY_RESULT_BACKEND = env.str(
-    "CELERY_RESULT_BACKEND", default="redis://abundantia_redis:6379/1"
-)
-CELERY_BEAT_SCHEDULE = {}
+AWS_ACCESS_ID = env.str("AWS_ACCESS_ID")
+AWS_SECRET_KEY = env.str("AWS_SECRET_KEY")
 
-# HGBRASIL API
-HGBRASIL_API_URL = env.str("HGBRASIL_API_URL", default="https://api.hgbrasil.com/{}")
-HGBRASIL_API_TOKEN = env.str("HGBRASIL_API_TOKEN", "123")
-
-# Schedule
+CELERY_BROKER_URL = "sqs://{access_id}:{secret}@".format(
+    access_id=AWS_ACCESS_ID, secret=AWS_SECRET_KEY
+)
+CELERY_RESULT_BACKEND = None
 CELERY_BEAT_SCHEDULE = {
     "currency-fetch-data": {
         "task": "abundantia_api.currency.tasks.task_update_all_currencies_quotations",
         "schedule": crontab(hour="*/1", minute="0"),
     }
 }
+
+# HGBRASIL API
+HGBRASIL_API_URL = env.str("HGBRASIL_API_URL", default="https://api.hgbrasil.com/{}")
+HGBRASIL_API_TOKEN = env.str("HGBRASIL_API_TOKEN", "123")
+
