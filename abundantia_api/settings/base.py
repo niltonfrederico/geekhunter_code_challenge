@@ -108,6 +108,8 @@ REST_FRAMEWORK = {
         "rest_framework.filters.OrderingFilter",
     ),
     "DEFAULT_RENDERER_CLASSES": ("rest_framework.renderers.JSONRenderer",),
+    "PAGE_SIZE": 100,
+    "DEFAULT_PAGINATION_CLASS": "abundantia_api.common.pagination.LimitOffsetRelativePathPagination",
 }
 
 
