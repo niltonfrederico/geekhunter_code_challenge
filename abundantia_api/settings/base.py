@@ -31,7 +31,9 @@ ALLOWED_HOSTS = ["*"]
 INSTALLED_APPS = [
     "django.contrib.auth",
     "django.contrib.contenttypes",
+    "django.contrib.staticfiles",
     "rest_framework",
+    "rest_framework_swagger",
     "abundantia_api.currency.apps.CurrencyConfig",
 ]
 
@@ -42,6 +44,8 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = "abundantia_api.urls"
+
+STATIC_URL = "/static/"
 
 TEMPLATES = [
     {
