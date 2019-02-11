@@ -1,0 +1,43 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      User-Agent: [python-requests/2.21.0]
+    method: GET
+    uri: https://api.hgbrasil.com/finance?array_limit=1&fields=only_results,bitcoin,currencies?key=1cd8e6f4
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAA3ySX2/TMBTFv4p1n73IcZPmz1vSdqiMjdCsSAimyk3dzYpnT449FqZ8d+SOQlqJ
+        Pd5j+XeOzr2vsO0hhx3fMyctYHhmUuw2Le8h3zPZcQyGd07aDvJXaJwxXDWCH6ZOO9NwyKFcfQIM
+        63ruVcUevTbXUjIDGLauh3wSJJM4wdBxKSFXTkrvZASzQivISUCi6YBhsV6NEAtn9BEQBZTG2XsA
+        Gg4YPpTVCFBpp3aottxIoe7/oVJK/0u6IAFJPapY1SNUYe65skJxVPHubyoSkCxN30kVEo8qb2cj
+        VClso4U6MsJokk6DOA2PmJFwmitLJsOAobO6aQ8LWJafvy7qqhjDr384Quj0Eh3fMEjd/IFAzTSq
+        mJMao9KwX0IChictlF9vFodxFGRkeu5LBww3RT0vvoyM3gRU+zDompmW21OrG/4TfdOmRTNhe4zW
+        Sljul8Es70auCc3SgJ7XFg0YZsW4tVkxQxE5taiYER1Gl/4mH+CMkcQ+9vLqarEcxxZtywWiND5F
+        3eq21xh9ZE9MnZIuaEBC3zt7ZkKyreSbt8PvIP9+OP07DJa9HOa7AQN/4Y3zfzdWeE8SEAx7ox83
+        DWseOOTWOD78BgAA//8DAAx/CSl5AwAA
+    headers:
+      CF-RAY: [4a76d53d6cf62402-IAD]
+      Cache-Control: ['max-age=0, private, must-revalidate']
+      Connection: [keep-alive]
+      Content-Encoding: [gzip]
+      Content-Type: [application/json; charset=utf-8]
+      Date: ['Mon, 11 Feb 2019 12:31:31 GMT']
+      ETag: [W/"733c01b5a43ac8df95989b29b443ef75"]
+      Expect-CT: ['max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"']
+      Server: [cloudflare]
+      Set-Cookie: ['__cfduid=d1b5d8bc7872e81d2bc238575c761ba391549888291; expires=Tue,
+          11-Feb-20 12:31:31 GMT; path=/; domain=.hgbrasil.com; HttpOnly']
+      Transfer-Encoding: [chunked]
+      X-Content-Type-Options: [nosniff]
+      X-Frame-Options: [SAMEORIGIN]
+      X-Request-Id: [790f68d0-f3d0-4f4b-b2af-e547fcf4b043]
+      X-Runtime: ['0.008074']
+      X-UA-Compatible: ['IE=Edge,chrome=1']
+      X-XSS-Protection: [1; mode=block]
+    status: {code: 200, message: OK}
+version: 1

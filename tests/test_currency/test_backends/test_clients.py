@@ -1,8 +1,6 @@
 import pytest
 import vcr
 
-from unittest import mock
-
 from hamcrest import assert_that, has_entries
 
 from abundantia_api.currency.backends.base import BaseClient
@@ -61,12 +59,8 @@ def test_base_client_get(base_client):
 def test_hgbrasil_client_get_quotations(hgbrasil_client):
     response = hgbrasil_client.get_quotations()
 
-    assert response.status_code == 200
-
-    response_json = response.json()
-
     assert_that(
-        response_json,
+        response,
         has_entries(
             {
                 "by": "default",

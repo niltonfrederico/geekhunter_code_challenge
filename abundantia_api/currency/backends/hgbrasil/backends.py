@@ -26,16 +26,14 @@ class HGBrasilBackend(BaseBackend):
                 amount = currency_info.get("buy")
                 variation = currency_info.get("variation")
 
-                insert_data = {
-                    "currency": currency,
-                    "amount": amount,
-                    "variation": variation,
-                }
+                insert_data = Quotation(
+                    currency=currency, amount=amount, variation=variation
+                )
 
                 dataset.append(insert_data)
 
             if dataset:
-                Currency.objects.bulk_create(dataset)
+                Quotation.objects.bulk_create(dataset)
 
     def _get_currency_data(self, needle, haystack):
         results = haystack.get("results")
