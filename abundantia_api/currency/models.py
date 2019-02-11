@@ -1,8 +1,7 @@
 from django.db import models
 
-from model_utils.choices import Choices
-
 from abundantia_api.common.models import BaseModel
+from abundantia_api.currency.backends import QuotationsBackendManager
 
 
 class Currency(BaseModel):
@@ -18,6 +17,11 @@ class Currency(BaseModel):
 
 class Quotation(BaseModel):
 
+    backend_id = models.CharField(
+        max_length=32,
+        choices=QuotationsBackendManager.get_backends_ids(),
+        db_index=True,
+    )
     currency = models.ForeignKey(
         Currency, related_name="quotations", on_delete=models.CASCADE
     )

@@ -112,6 +112,14 @@ REST_FRAMEWORK = {
     "DEFAULT_PAGINATION_CLASS": "abundantia_api.common.pagination.LimitOffsetRelativePathPagination",
 }
 
+# CELERY
+CELERY_BROKER_URL = env.str(
+    "CELERY_BROKER_URL", default="redis://abundantia_redis:6379/0"
+)
+CELERY_RESULT_BACKEND = env.str(
+    "CELERY_RESULT_BACKEND", default="redis://abundantia_redis:6379/1"
+)
+CELERY_BEAT_SCHEDULE = {}
 
 # CURRENCY BACKENDS
 CURRENCY_QUOTATIONS_BACKENDS = [

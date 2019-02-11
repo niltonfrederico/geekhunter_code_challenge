@@ -4,10 +4,11 @@ import pytest
 import vcr
 
 from autofixture import AutoFixture
-from hamcrest import assert_that, has_entries
+from hamcrest import assert_that, has_entries, has_items
 
 from abundantia_api.currency.models import Currency, Quotation
-from abundantia_api.currency.backends.base import BaseClient
+from abundantia_api.currency.backends import QuotationsBackendManager
+from abundantia_api.currency.backends.base import BaseClient, BaseBackend
 from abundantia_api.currency.backends import QuotationsBackendManager
 from abundantia_api.currency.backends.hgbrasil.clients import HGBrasilClient
 
@@ -22,11 +23,19 @@ client_vcr = vcr.VCR(
 
 
 def test_get_backends():
-    pass
+    backends_id = QuotationsBackendManager.get_backends_ids()
+
+    assert len(backends_id) == 1
+    assert_that(backends_id, has_items("hgbrasil"))
 
 
 def test_backend_get_currencies():
-    pass
+    AutoFixture(Currency).create(5)
+
+    backend = BaseBackend()
+    currencies_queryset = backend._get_currencies()
+
+    assert currencies_queryset.count() == 5
 
 
 @client_vcr.use_cassette()
@@ -88,5 +97,5 @@ def test_backend_update_inactivated_items():
     quotation = quotations_queryset.first()
 
     assert quotation.currency_id == active_currency.id
-    assert quotation.amount == Decimal("3.7357")
-    assert quotation.variation == Decimal("0.0460")
+    assert quotation.amount == Decimal("3.7356")
+    assert quotation.variation == Decimal("0.0430")

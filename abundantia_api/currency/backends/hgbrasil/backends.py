@@ -15,7 +15,7 @@ class HGBrasilBackend(BaseBackend):
     def update(self):
         client = HGBrasilClient()
 
-        currencies_queryset = Currency.objects.active()
+        currencies_queryset = self._get_currencies()
         if currencies_queryset:
             response = client.get_quotations()
 
@@ -27,7 +27,10 @@ class HGBrasilBackend(BaseBackend):
                 variation = currency_info.get("variation")
 
                 insert_data = Quotation(
-                    currency=currency, amount=amount, variation=variation
+                    backend_id=self.id,
+                    currency=currency,
+                    amount=amount,
+                    variation=variation,
                 )
 
                 dataset.append(insert_data)
