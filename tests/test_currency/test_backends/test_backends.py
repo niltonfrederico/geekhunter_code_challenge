@@ -1,10 +1,8 @@
-from decimal import Decimal
-
 import pytest
 import vcr
 
 from autofixture import AutoFixture
-from hamcrest import assert_that, has_entries, has_items
+from hamcrest import assert_that, has_items
 
 from abundantia_api.currency.models import Currency, Quotation
 from abundantia_api.currency.backends import QuotationsBackendManager
@@ -54,8 +52,8 @@ def test_backend_update_simple():
     quotation = quotations_queryset.first()
 
     assert quotation.currency_id == currency.id
-    assert quotation.amount == Decimal("3.7357")
-    assert quotation.variation == Decimal("0.0460")
+    assert quotation.amount == "3.7357"
+    assert quotation.variation == "0.0460"
 
 
 @client_vcr.use_cassette()
@@ -97,5 +95,5 @@ def test_backend_update_inactivated_items():
     quotation = quotations_queryset.first()
 
     assert quotation.currency_id == active_currency.id
-    assert quotation.amount == Decimal("3.7356")
-    assert quotation.variation == Decimal("0.0430")
+    assert quotation.amount == "3.7356"
+    assert quotation.variation == "0.0430"

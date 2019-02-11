@@ -1,0 +1,40 @@
+version: "3"
+services:
+  abundantia_app:
+    container_name: abundantia-prod-app
+    build:
+      context: ../../
+      dockerfile: docker/production/Dockerfile
+    command: /bin/bash -c "dockerize -wait tcp://abundantia_redis:6379 && gunicorn --log-level debug --bind 0.0.0.0:8000 --timeout 120 abundantia_api.wsgi:application"
+    environment:
+      - PYTHONUNBUFFERED=0
+      - DJANGO_SETTINGS_MODULE=abundantia_api.settings.production
+    volumes:
+      - ../../:/code/
+    ports:
+      - "8000:8000"
+      - "5555:5555"
+    links:
+      - abundantia_redis
+    depends_on:
+      - abundantia_redis
+  abundantia_redis:
+    container_name: abundantia-prod-redis
+    image: redis:4.0.1-alpine
+    ports:
+      - "6379:6379"
+  abundantia_nginx:
+    restart: always
+    image: nginx
+    volumes:
+      - ./nginx/:/etc/nginx/conf.d
+      - ../../code/static:/code/static
+    links:
+      - abundantia_app
+    depends_on:
+      - abundantia_app
+    ports:
+      - "80:80"
+volumes:
+  data-volume:
+  s3-folder:
