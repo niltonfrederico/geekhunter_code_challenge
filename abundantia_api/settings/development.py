@@ -9,7 +9,9 @@ SECRET_KEY = "c@vc)dkhlqrutz3y$1y!7^1t_()a(y@$n3z-g@kgw_e$%=goq&"
 DEBUG = True
 
 DATABASES = {
-    "default": env.db(default="mysql://root:password@abundantia_mysql:3306/abundantia")
+    "default": env.db(
+        default="djongo://root:abundantia@abundantia_mongo:27017/abundantia"
+    )
 }
 
 # CELERY
