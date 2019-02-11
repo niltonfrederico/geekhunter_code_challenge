@@ -1,0 +1,19 @@
+-r base.txt
+
+pytest==4.2.0
+flake8==3.7.5
+pytest-flake8==1.0.4
+pytest-cov==2.6.1
+pytest-django==3.4.7
+pytest-repeat==0.7.0
+django-autofixture==0.12.1
+django_extensions==2.1.5
+ipdb==0.11
+pyhamcrest==1.9
+pylint==2.2.2
+pylint-django==2.0.5
+black==18.9b0
+vcrpy==2.0.1
+pyyaml==3.13
+responses==0.10.5
+Werkzeug==0.14.1

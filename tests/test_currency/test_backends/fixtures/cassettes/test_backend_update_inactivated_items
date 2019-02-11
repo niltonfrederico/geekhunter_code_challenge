@@ -1,0 +1,43 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      User-Agent: [python-requests/2.21.0]
+    method: GET
+    uri: https://api.hgbrasil.com/finance?array_limit=1&fields=only_results,bitcoin,currencies?key=1cd8e6f4
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAA3ySUU/bMBSF/4p1n13LcdI2yVvSlqljsNLQSdOGKjd1wYqxkWMzOpT/PrkMliCN
+        x3ssf+fonvsMuyPksBcH7pUDDI9cyf22EUfID1y1AoMVrVeuhfwZam+t0LUUp6k13tYCcijXXwDD
+        ppoHVfP7oM2NUtwChp0/Qh6TaTyeYGiFUpBrr1RwspI7aTTklNAk7jAsNuseYuGteQUkhLE0/ggw
+        TTsMn8pVD7AyXu9R5YRVUt/+Q6Usjv6LGlFCx4FVrKseq7C3QjupBVqJ9i0WJTT7INaIkoSOOwzl
+        9azHKqWrjdSvkCiJsymJJ2+cnjCEpdmk6zC0ztTNqYJl+fXboloVffjFT08pm5yh1zcMytR/IVBx
+        g1bcK4NRaflvqQDDg5E6FJyNaUpJlrH3vmzaYbgsqnlx1XN6EVAV0qALbhvhhl6X4hf6bmyDZtId
+        Mdpo6UTogzvR9mynLEsJe9dnlHQYZkV/bbNihhI6tFhxK1uMzsJZ3sGAEZGIhdjL8/PFsh9bNo2Q
+        iLHxEHVtmqPB6DN/4HpIGjFCo7B4/sil4jslti+330L+43T9NxgcfzrNNx0G8SRqH/5unQyelFAM
+        B2vutzWv7wTkznrR/QEAAP//AwA/LViUfAMAAA==
+    headers:
+      CF-RAY: [4a774b55bdef95aa-IAD]
+      Cache-Control: ['max-age=0, private, must-revalidate']
+      Connection: [keep-alive]
+      Content-Encoding: [gzip]
+      Content-Type: [application/json; charset=utf-8]
+      Date: ['Mon, 11 Feb 2019 13:52:08 GMT']
+      ETag: [W/"94ceedba62475cf05e0f964adf1f8e9b"]
+      Expect-CT: ['max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"']
+      Server: [cloudflare]
+      Set-Cookie: ['__cfduid=d3bcf6a066bc822b80a32787609cdf49f1549893128; expires=Tue,
+          11-Feb-20 13:52:08 GMT; path=/; domain=.hgbrasil.com; HttpOnly']
+      Transfer-Encoding: [chunked]
+      X-Content-Type-Options: [nosniff]
+      X-Frame-Options: [SAMEORIGIN]
+      X-Request-Id: [0b4161c5-69a1-49ac-af39-5f6ce3b4ac12]
+      X-Runtime: ['0.005852']
+      X-UA-Compatible: ['IE=Edge,chrome=1']
+      X-XSS-Protection: [1; mode=block]
+    status: {code: 200, message: OK}
+version: 1
