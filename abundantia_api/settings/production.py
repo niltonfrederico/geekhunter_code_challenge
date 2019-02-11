@@ -6,10 +6,16 @@ SECRET_KEY = env.str("SECRET_KEY", default="123")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
+STATIC_ROOT = "./static/"
+
+MONGODB_NAME = env.str("MONGODB_NAME", "abundantia")
+MONGODB_HOST = env.str(
+    "MONGODB_HOST",
+    "mongodb+srv://abundantia_api:XVqVnYnvBo6pH79z@cluster0-jhafu.mongodb.net/test?retryWrites=true",
+)
+
 DATABASES = {
-    "default": env.db(
-        default="djongo://abundantia_api:XVqVnYnvBo6pH79z@cluster0-jhafu.mongodb.net/test?retryWrites=true"
-    )
+    "default": {"ENGINE": "djongo", "NAME": MONGODB_NAME, "HOST": MONGODB_HOST}
 }
 
 # CELERY

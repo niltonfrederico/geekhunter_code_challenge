@@ -5,7 +5,7 @@ services:
     build:
       context: ../../
       dockerfile: docker/production/Dockerfile
-    command: /bin/bash -c "dockerize -wait tcp://abundantia_redis:6379 && gunicorn --log-level debug --bind 0.0.0.0:8000 --timeout 120 abundantia_api.wsgi:application"
+    command: /bin/bash -c "dockerize -wait tcp://abundantia_redis:6379 && python manage.py collectstatic --noinput && python manage.py migrate && gunicorn --log-level debug --bind 0.0.0.0:8000 --timeout 120 abundantia_api.wsgi:application"
     environment:
       - PYTHONUNBUFFERED=0
       - DJANGO_SETTINGS_MODULE=abundantia_api.settings.production
@@ -28,7 +28,7 @@ services:
     image: nginx
     volumes:
       - ./nginx/:/etc/nginx/conf.d
-      - ../../code/static:/code/static
+      - ../../static:/code/static
     links:
       - abundantia_app
     depends_on:
