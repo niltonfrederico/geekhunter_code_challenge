@@ -30,6 +30,13 @@ def test_quotations_create():
     assert quotation
     assert Quotation.objects.all().count() == 1
 
+def test_calculate_quotations_variation_without_quotations():
+    currency = AutoFixture(Currency).create_one()
+
+    result = currency._calculate_quotations_variation(currency.quotations.all())
+
+    assert result == 0
+
 
 def test_get_last_day_quotation():
     currency = AutoFixture(Currency).create_one()
