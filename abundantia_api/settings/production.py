@@ -26,7 +26,7 @@ CELERY_RESULT_BACKEND = None
 CELERY_BEAT_SCHEDULE = {
     "currency-fetch-data": {
         "task": "abundantia_api.currency.tasks.task_update_all_currencies_quotations",
-        "schedule": crontab(minute="*/1"),
+        "schedule": crontab(hour="*/1", minute=0),
     }
 }
 CELERY_TIMEZONE = TIME_ZONE
