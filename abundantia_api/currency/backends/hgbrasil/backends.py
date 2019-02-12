@@ -19,13 +19,6 @@ class HGBrasilBackend(BaseBackend):
         if currencies_queryset:
             response = client.get_quotations()
 
-            frozen_hash = hash(frozenset(response.items()))
-
-            quotations_queryset = Quotation.objects.filter(unique_hash=frozen_hash)
-
-            if quotations_queryset:
-                return
-
             dataset = []
             for currency in currencies_queryset:
                 currency_info = self._get_currency_data(currency.code, response)

@@ -18,19 +18,19 @@ class Currency(BaseModel):
     def __str__(self):
         return f"({self.id}) {self.code}"
 
-    def _sum_quotations_variation(self, quotation_queryset):
+    def _calculate_quotations_variation(self, quotation_queryset):
         # This is being done this way to increase perfomance.
         variations = [Decimal(quotation.variation) for quotation in quotation_queryset]
         total = sum(variations)
 
-        return total
+        return total / quotation_queryset.count()
 
     def get_last_day_quotation(self):
         quotation_queryset = self.quotations.filter(
             created__gte=timezone.localdate(), created__lte=timezone.localdate()
         )
 
-        return self._sum_quotations_variation(quotation_queryset)
+        return self._calculate_quotations_variation(quotation_queryset)
 
     def get_last_week_quotation(self):
         start_date = timezone.localdate() - relativedelta(days=7)
@@ -39,7 +39,7 @@ class Currency(BaseModel):
             created__gte=start_date, created__lte=timezone.localdate()
         )
 
-        return self._sum_quotations_variation(quotation_queryset)
+        return self._calculate_quotations_variation(quotation_queryset)
 
     def get_last_month_quotation(self):
         start_date = timezone.localdate().replace(day=1)
@@ -48,7 +48,7 @@ class Currency(BaseModel):
             created__gte=start_date, created__lte=timezone.localdate()
         )
 
-        return self._sum_quotations_variation(quotation_queryset)
+        return self._calculate_quotations_variation(quotation_queryset)
 
 
 class Quotation(BaseModel):
@@ -61,6 +61,5 @@ class Quotation(BaseModel):
     currency = models.ForeignKey(
         Currency, related_name="quotations", on_delete=models.CASCADE
     )
-    unique_hash = models.CharField(max_length=64)
     amount = models.DecimalField(max_digits=12, decimal_places=4)
     variation = models.DecimalField(max_digits=12, decimal_places=4)
