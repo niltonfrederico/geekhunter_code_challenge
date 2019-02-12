@@ -27,30 +27,36 @@ class Currency(BaseModel):
         # This is being done this way to increase perfomance.
         variations = [Decimal(quotation.variation) for quotation in quotation_queryset]
         total_sum = sum(variations)
-        
-        return total_sum / quotation_queryset.count()
+
+        total = total_sum / total_quotations
+
+        return total.quantize(Decimal(".0001"))
 
     def get_last_day_quotation(self):
-        quotation_queryset = self.quotations.filter(
-            created__gte=timezone.localdate(), created__lte=timezone.localdate()
+        now = timezone.now()
+        start_day = now.replace(hour=0, minute=0, second=0)
+        end_day = now.replace(hour=23, minute=59, second=59)
+
+        quotation_queryset = self.quotations.filter(created__gte=start_day).filter(
+            created__lte=end_day
         )
 
         return self._calculate_quotations_variation(quotation_queryset)
 
     def get_last_week_quotation(self):
-        start_date = timezone.localdate() - relativedelta(days=7)
+        start_date = timezone.now() - relativedelta(days=7)
 
-        quotation_queryset = self.quotations.filter(
-            created__gte=start_date, created__lte=timezone.localdate()
+        quotation_queryset = self.quotations.filter(created__gte=start_date).filter(
+            created__lte=timezone.now()
         )
 
         return self._calculate_quotations_variation(quotation_queryset)
 
     def get_last_month_quotation(self):
-        start_date = timezone.localdate().replace(day=1)
+        start_date = timezone.now().replace(day=1)
 
-        quotation_queryset = self.quotations.filter(
-            created__gte=start_date, created__lte=timezone.localdate()
+        quotation_queryset = self.quotations.filter(created__gte=start_date).filter(
+            created__lte=timezone.now()
         )
 
         return self._calculate_quotations_variation(quotation_queryset)

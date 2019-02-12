@@ -38,7 +38,9 @@ def test_read_currency_serializer():
 
 
 def test_read_quotation_serializer():
-    quotation = AutoFixture(Quotation, generate_fk=True).create_one()
+    quotation = AutoFixture(
+        Quotation, field_values={"amount": 123.4567}, generate_fk=True
+    ).create_one()
 
     serializer = QuotationReadSerializer(instance=quotation)
 
