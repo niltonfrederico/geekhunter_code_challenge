@@ -61,5 +61,6 @@ class Quotation(BaseModel):
     currency = models.ForeignKey(
         Currency, related_name="quotations", on_delete=models.CASCADE
     )
+    unique_hash = models.CharField(max_length=64)
     amount = models.DecimalField(max_digits=12, decimal_places=4)
     variation = models.DecimalField(max_digits=12, decimal_places=4)

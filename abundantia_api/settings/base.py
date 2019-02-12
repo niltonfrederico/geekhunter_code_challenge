@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.staticfiles",
+    "django_celery_beat",
     "corsheaders",
     "rest_framework",
     "rest_framework_swagger",
