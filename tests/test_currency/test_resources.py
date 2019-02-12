@@ -1,3 +1,5 @@
+from decimal import Decimal
+
 import pytest
 
 from rest_framework.exceptions import ErrorDetail
@@ -5,6 +7,8 @@ from rest_framework.exceptions import ErrorDetail
 from autofixture import AutoFixture
 from rest_framework.reverse import reverse
 from hamcrest import assert_that, has_entries
+
+from django.utils import timezone
 
 from abundantia_api.currency.models import Currency, Quotation
 
@@ -151,6 +155,37 @@ def test_read_currency_with_quotations_serializer(api_client):
                 "code": quotation.currency.code,
                 "amount": str(quotation.amount),
                 "variation": str(quotation.variation),
+            }
+        ),
+    )
+
+
+def test_read_currency_analytics(api_client):
+    quotation = AutoFixture(
+        Quotation,
+        field_values={
+            "amount": 10.5001,
+            "variation": 10.1234,
+            "created": timezone.localdate(),
+        },
+        generate_fk=True,
+    ).create_one()
+    currency = quotation.currency
+
+    url = reverse("currencies:currencies-analytics", kwargs={"code": currency.code})
+    response = api_client.get(url)
+
+    assert response.status_code == 200
+
+    data = response.data
+
+    assert_that(
+        data,
+        has_entries(
+            {
+                "last_day": Decimal("10.1234"),
+                "last_week": Decimal("10.1234"),
+                "last_month": Decimal("10.1234"),
             }
         ),
     )
