@@ -19,11 +19,16 @@ class Currency(BaseModel):
         return f"({self.id}) {self.code}"
 
     def _calculate_quotations_variation(self, quotation_queryset):
+        total_quotations = quotation_queryset.count()
+
+        if total_quotations <= 0:
+            return 0
+
         # This is being done this way to increase perfomance.
         variations = [Decimal(quotation.variation) for quotation in quotation_queryset]
-        total = sum(variations)
-
-        return total / quotation_queryset.count()
+        total_sum = sum(variations)
+        
+        return total_sum / quotation_queryset.count()
 
     def get_last_day_quotation(self):
         quotation_queryset = self.quotations.filter(
