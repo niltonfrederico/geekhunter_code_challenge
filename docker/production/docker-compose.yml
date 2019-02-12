@@ -9,13 +9,6 @@ services:
     environment:
       - PYTHONUNBUFFERED=0
       - DJANGO_SETTINGS_MODULE=abundantia_api.settings.production
-      - MONGODB_NAME=abundantia
-      - MONGODB_HOST=mongodb+srv://abundantia_api:XVqVnYnvBo6pH79z@cluster0-jhafu.mongodb.net/test?retryWrites=true
-      - SECRET_KEY=G7F1k{k~DTcK6.*bmj_D^?9Z(I@{f]NVvX)|Ba{f,O=QQ&rFb{.&qk,A^9FUK'a
-      - HGBRASIL_API_URL=https://api.hgbrasil.com/{}
-      - HGBRASIL_API_TOKEN=4786e1eb
-      - AWS_ACCESS_ID=AKIAJ57PPUQEO4KC7QIA
-      - AWS_SECRET_KEY=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
     volumes:
       - ../../:/code/
     ports:
@@ -34,13 +27,6 @@ services:
     environment:
       - PYTHONUNBUFFERED=0
       - DJANGO_SETTINGS_MODULE=abundantia_api.settings.production
-      - MONGODB_NAME=abundantia
-      - MONGODB_HOST=mongodb+srv://abundantia_api:XVqVnYnvBo6pH79z@cluster0-jhafu.mongodb.net/test?retryWrites=true
-      - SECRET_KEY=G7F1k{k~DTcK6.*bmj_D^?9Z(I@{f]NVvX)|Ba{f,O=QQ&rFb{.&qk,A^9FUK'a
-      - HGBRASIL_API_URL=https://api.hgbrasil.com/{}
-      - HGBRASIL_API_TOKEN=4786e1eb
-      - AWS_ACCESS_ID=AKIAJ57PPUQEO4KC7QIA
-      - AWS_SECRET_KEY=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
     volumes:
       - ../../:/code/
     links:
@@ -56,13 +42,6 @@ services:
     environment:
       - PYTHONUNBUFFERED=0
       - DJANGO_SETTINGS_MODULE=abundantia_api.settings.production
-      - MONGODB_NAME=abundantia
-      - MONGODB_HOST=mongodb+srv://abundantia_api:XVqVnYnvBo6pH79z@cluster0-jhafu.mongodb.net/test?retryWrites=true
-      - SECRET_KEY=G7F1k{k~DTcK6.*bmj_D^?9Z(I@{f]NVvX)|Ba{f,O=QQ&rFb{.&qk,A^9FUK'a
-      - HGBRASIL_API_URL=https://api.hgbrasil.com/{}
-      - HGBRASIL_API_TOKEN=4786e1eb
-      - AWS_ACCESS_ID=AKIAJ57PPUQEO4KC7QIA
-      - AWS_SECRET_KEY=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
     volumes:
       - ../../:/code/
     links:
