@@ -68,7 +68,7 @@ def test_currency_list(api_client):
 def test_currency_get(api_client):
     currency = AutoFixture(Currency).create_one()
 
-    url = reverse("currencies:currencies-detail", kwargs={"pk": currency.id})
+    url = reverse("currencies:currencies-detail", kwargs={"code": currency.code})
 
     response = api_client.get(url)
 
@@ -90,7 +90,7 @@ def test_currency_get(api_client):
 def test_currency_update(api_client):
     currency = AutoFixture(Currency, {"code": "TST"}).create_one()
 
-    url = reverse("currencies:currencies-detail", kwargs={"pk": currency.id})
+    url = reverse("currencies:currencies-detail", kwargs={"code": currency.code})
 
     response = api_client.put(
         url, data={"name": "updated", "code": currency.code, "is_active": False}
@@ -120,7 +120,7 @@ def test_read_currency_with_quotations_serializer(api_client):
     ).create_one()
     currency = quotation.currency
 
-    url = reverse("currencies:currencies-quotations", kwargs={"pk": currency.id})
+    url = reverse("currencies:currencies-quotations", kwargs={"code": currency.code})
 
     response = api_client.get(url)
 

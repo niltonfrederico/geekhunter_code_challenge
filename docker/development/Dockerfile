@@ -1,6 +1,6 @@
 FROM python:3.6.1
 
-RUN apt-get update && apt-get install mysql-client gettext libgettextpo-dev libyaml-dev -y
+RUN apt-get update && apt-get install mysql-client gettext libgettextpo-dev libyaml-dev libcurl4-openssl-dev libssl-dev -y
 
 ENV DOCKERIZE_VERSION v0.5.0
 RUN wget https://github.com/jwilder/dockerize/releases/download/$DOCKERIZE_VERSION/dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz \
