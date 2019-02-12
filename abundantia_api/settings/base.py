@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.staticfiles",
+    "corsheaders",
     "rest_framework",
     "rest_framework_swagger",
     "abundantia_api.currency.apps.CurrencyConfig",
@@ -42,6 +43,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
+    "corsheaders.middleware.CorsMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
@@ -98,7 +100,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = "en-us"
 
-TIME_ZONE = "UTC"
+TIME_ZONE = "America/Sao_Paulo"
 
 USE_I18N = True
 
@@ -118,6 +120,9 @@ REST_FRAMEWORK = {
     "PAGE_SIZE": 100,
     "DEFAULT_PAGINATION_CLASS": "abundantia_api.common.pagination.LimitOffsetRelativePathPagination",
 }
+
+# CORS
+CORS_ORIGIN_ALLOW_ALL = True
 
 # CELERY
 CELERY_BROKER_URL = env.str(

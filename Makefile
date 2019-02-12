@@ -31,7 +31,7 @@ up-no-cache: # Up docker containers from zero
 
 test: ## Run all tests (pytest) inside docker.
 	@echo "--> Testing on Docker."
-	docker-compose --file docker/development/docker-compose.yml run --rm test py.test -s --cov-report term --cov-report html
+	docker-compose --file docker/development/docker-compose.yml run --rm $(WORKSPACE_CONTAINER) py.test -s --cov-report term --cov-report html
 
 bash: ## Run bash for container.
 	@echo "--> Starting bash"

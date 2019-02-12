@@ -1,14 +1,18 @@
+from decimal import Decimal
+
 import pytest
 
 from autofixture import AutoFixture
-
 from hamcrest import assert_that, has_entries
+
+from django.utils import timezone
 
 from abundantia_api.currency.models import Currency, Quotation
 from abundantia_api.currency.serializers import (
     CurrencyReadSerializer,
     QuotationReadSerializer,
     CurrencyWithQuotationSerializer,
+    QuotationAnalyticsSerializer,
 )
 
 
@@ -87,6 +91,34 @@ def test_read_currency_with_quotations_serializer():
                 "code": quotation.currency.code,
                 "amount": str(quotation.amount),
                 "variation": str(quotation.variation),
+            }
+        ),
+    )
+
+
+def test_read_currency_analytics_serializer():
+    quotation = AutoFixture(
+        Quotation,
+        field_values={
+            "amount": 10.5001,
+            "variation": 10.1234,
+            "created": timezone.localdate(),
+        },
+        generate_fk=True,
+    ).create_one()
+    currency = quotation.currency
+
+    serializer = QuotationAnalyticsSerializer(instance=currency)
+
+    data = serializer.data
+
+    assert_that(
+        data,
+        has_entries(
+            {
+                "last_day": Decimal("10.1234"),
+                "last_week": Decimal("10.1234"),
+                "last_month": Decimal("10.1234"),
             }
         ),
     )
