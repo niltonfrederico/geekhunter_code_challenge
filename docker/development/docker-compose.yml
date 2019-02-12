@@ -19,6 +19,36 @@ services:
     depends_on:
       - abundantia_redis
       - abundantia_mongo
+  abundantia_worker:
+    container_name: abundantia-dev-worker
+    build:
+      context: ../../
+      dockerfile: docker/development/Dockerfile
+    command: /bin/bash -c "dockerize -wait tcp://abundantia_redis:6379 && celery -A abundantia_api worker --loglevel=info"
+    environment:
+      - PYTHONUNBUFFERED=0
+      - DJANGO_SETTINGS_MODULE=abundantia_api.settings.development
+    volumes:
+      - ../../:/code/
+    links:
+      - abundantia_redis
+    depends_on:
+      - abundantia_redis
+  abundantia_beat:
+    container_name: abundantia-dev-beat
+    build:
+      context: ../../
+      dockerfile: docker/development/Dockerfile
+    command: /bin/bash -c "dockerize -wait tcp://abundantia_redis:6379 && celery -A abundantia_api beat --loglevel=info"
+    environment:
+      - PYTHONUNBUFFERED=0
+      - DJANGO_SETTINGS_MODULE=abundantia_api.settings.development
+    volumes:
+      - ../../:/code/
+    links:
+      - abundantia_redis
+    depends_on:
+      - abundantia_redis
   abundantia_redis:
     container_name: abundantia-dev-redis
     image: redis:4.0.1-alpine

@@ -19,10 +19,6 @@ class HGBrasilBackend(BaseBackend):
         if currencies_queryset:
             response = client.get_quotations()
 
-            import ipdb
-
-            ipdb.set_trace()
-
             dataset = []
             for currency in currencies_queryset:
                 currency_info = self._get_currency_data(currency.code, response)
