@@ -34,4 +34,3 @@ CELERY_TIMEZONE = TIME_ZONE
 # HGBRASIL API
 HGBRASIL_API_URL = env.str("HGBRASIL_API_URL", default="https://api.hgbrasil.com/{}")
 HGBRASIL_API_TOKEN = env.str("HGBRASIL_API_TOKEN", "123")
-

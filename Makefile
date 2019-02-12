@@ -39,7 +39,7 @@ bash: ## Run bash for container.
 
 migrate: ## manage.py makemigrations.
 	@echo "--> Migrating..."
-	docker-compose --file docker/development/docker-compose.yml run --rm $(WORKSPACE_CONTAINER) /bin/bash -c "dockerize -wait tcp://abundantia_mongo:27017 && python manage.py migrate"
+	docker-compose --file docker/development/docker-compose.yml run --rm $(WORKSPACE_CONTAINER) /bin/bash -c "dockerize -wait tcp://abundantia_mongo_db:27017 && python manage.py migrate"
 
 migrations: ## manage.py migrate.
 	@echo "--> Creating migrations..."

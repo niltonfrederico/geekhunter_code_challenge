@@ -40,7 +40,7 @@ def test_get_last_day_quotation():
 
     total = currency.get_last_day_quotation()
 
-    fixture_total = sum([quotation.variation for quotation in quotations])
+    fixture_total = sum([quotation.variation for quotation in quotations]) / len(quotations)
 
     assert total == fixture_total
 
@@ -56,7 +56,7 @@ def test_get_last_week_quotation():
 
     total = currency.get_last_week_quotation()
 
-    fixture_total = sum([quotation.variation for quotation in quotations])
+    fixture_total = sum([quotation.variation for quotation in quotations]) / len(quotations)
 
     assert total == fixture_total
 
@@ -72,6 +72,6 @@ def test_get_last_month_quotation():
 
     total = currency.get_last_month_quotation()
 
-    fixture_total = sum([quotation.variation for quotation in quotations])
+    fixture_total = sum([quotation.variation for quotation in quotations]) / len(quotations)
 
     assert total == fixture_total

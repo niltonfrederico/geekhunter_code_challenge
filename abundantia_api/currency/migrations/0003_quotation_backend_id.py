@@ -14,10 +14,4 @@ class Migration(migrations.Migration):
             field=models.CharField(db_index=True, default="hgbrasil", max_length=32),
             preserve_default=False,
         ),
-        migrations.AddField(
-            model_name="quotation",
-            name="unique_hash",
-            field=models.CharField(max_length=64),
-            preserve_default=False,
-        ),
     ]

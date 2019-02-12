@@ -5,7 +5,7 @@ services:
     build:
       context: ../../
       dockerfile: docker/development/Dockerfile
-    command: /bin/bash -c "dockerize -wait tcp://abundantia_redis:6379 -wait tcp://abundantia_mongo:27017 && python manage.py runserver_plus 0.0.0.0:8000"
+    command: /bin/bash -c "dockerize -wait tcp://abundantia_redis:6379 -wait tcp://abundantia_mongo_db:27017 && python manage.py runserver_plus 0.0.0.0:8000"
     environment:
       - PYTHONUNBUFFERED=0
     volumes:
@@ -15,58 +15,21 @@ services:
       - "5555:5555"
     links:
       - abundantia_redis
-      - abundantia_mongo
+      - abundantia_mongo_db
     depends_on:
       - abundantia_redis
-      - abundantia_mongo
-  abundantia_worker:
-    container_name: abundantia-dev-worker
-    build:
-      context: ../../
-      dockerfile: docker/development/Dockerfile
-    command: /bin/bash -c "dockerize -wait tcp://abundantia_redis:6379 && celery -A abundantia_api worker --loglevel=info"
-    environment:
-      - PYTHONUNBUFFERED=0
-      - DJANGO_SETTINGS_MODULE=abundantia_api.settings.development
-    volumes:
-      - ../../:/code/
-    links:
-      - abundantia_redis
-    depends_on:
-      - abundantia_redis
-  abundantia_beat:
-    container_name: abundantia-dev-beat
-    build:
-      context: ../../
-      dockerfile: docker/development/Dockerfile
-    command: /bin/bash -c "dockerize -wait tcp://abundantia_redis:6379 && celery -A abundantia_api beat --loglevel=info"
-    environment:
-      - PYTHONUNBUFFERED=0
-      - DJANGO_SETTINGS_MODULE=abundantia_api.settings.development
-    volumes:
-      - ../../:/code/
-    links:
-      - abundantia_redis
-    depends_on:
-      - abundantia_redis
+      - abundantia_mongo_db
   abundantia_redis:
     container_name: abundantia-dev-redis
     image: redis:4.0.1-alpine
     ports:
       - "6379:6379"
-  abundantia_mongo:
-    image: mongo
-    restart: always
+  abundantia_mongo_db:
+    image: mongo:4.0.6
+    container_name: abundantia_mongo_db
     environment:
-      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_USERNAME: another
       MONGO_INITDB_ROOT_PASSWORD: abundantia
-    environment:
-      - MONGO_DATA_DIR=/data/db
-      - MONGO_LOG_DIR=/dev/null
-    volumes:
-      - ../../data/db:/data/db
+      MONGO_INITDB_DATABASE: abundantia_db
     ports:
       - 27017:27017
-volumes:
-  data-volume:
-  s3-folder:

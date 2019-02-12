@@ -10,7 +10,7 @@ DEBUG = True
 
 DATABASES = {
     "default": env.db(
-        default="djongo://root:abundantia@abundantia_mongo:27017/abundantia"
+        default="djongo://another:abundantia@abundantia_mongo_db:27017/abundantia_db"
     )
 }
 
