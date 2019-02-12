@@ -13,3 +13,4 @@ dnspython==1.16.0
 mysqlclient==1.4.2
 boto3==1.9.91
 pycurl==7.43.0.2
+django-cors-headers==2.4.0
