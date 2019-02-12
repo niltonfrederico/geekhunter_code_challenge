@@ -26,6 +26,25 @@ class QuotationReadSerializer(BaseReadSerializer):
         return obj.currency.name
 
 
+class QuotationAnalyticsSerializer(serializers.ModelSerializer):
+    last_day = serializers.SerializerMethodField()
+    last_week = serializers.SerializerMethodField()
+    last_month = serializers.SerializerMethodField()
+
+    class Meta:
+        model = Currency
+        fields = ["last_day", "last_week", "last_month"]
+
+    def get_last_day(self, obj):
+        return obj.get_last_day_quotation()
+
+    def get_last_week(self, obj):
+        return obj.get_last_week_quotation()
+
+    def get_last_month(self, obj):
+        return obj.get_last_month_quotation()
+
+
 class CurrencyWithQuotationSerializer(BaseReadSerializer):
     quotations = QuotationReadSerializer(many=True)
 

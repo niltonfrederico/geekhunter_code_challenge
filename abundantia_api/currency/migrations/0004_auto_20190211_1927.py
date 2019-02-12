@@ -9,7 +9,6 @@ def set_currencies(apps, schema_editor):
 
     Currency.objects.get_or_create(code="USD", name="Dollar")
     Currency.objects.get_or_create(code="BTC", name="Bitcoin")
-    Currency.objects.get_or_create(code="BRL", name="Real")
     Currency.objects.get_or_create(code="EUR", name="Euro")
 
 
@@ -17,7 +16,7 @@ def reverse_set_currencies(apps, schema_editor):
     Currency = apps.get_model("currency", "Currency")
 
     if connection.vendor not in ["djongo", "mongodb"]:
-        Currency.objects.filter(code__in=["BTC", "USD", "BRL", "EUR"]).delete()
+        Currency.objects.filter(code__in=["BTC", "USD", "EUR"]).delete()
     else:
         q = (
             Q(code__contains="BTC")
