@@ -18,6 +18,24 @@ services:
       - abundantia_redis
     depends_on:
       - abundantia_redis
+  abundantia_worker:
+    container_name: abundantia-prod-worker
+    build:
+      context: ../../
+      dockerfile: docker/production/Dockerfile
+    command: /bin/bash -c "dockerize -wait tcp://abundantia_redis:6379 && python manage.py collectstatic --noinput && celery -A abundantia_api worker --loglevel=info"
+    environment:
+      - PYTHONUNBUFFERED=0
+      - DJANGO_SETTINGS_MODULE=abundantia_api.settings.production
+    volumes:
+      - ../../:/code/
+    ports:
+      - "8000:8000"
+      - "5555:5555"
+    links:
+      - abundantia_redis
+    depends_on:
+      - abundantia_redis
   abundantia_redis:
     container_name: abundantia-prod-redis
     image: redis:4.0.1-alpine
