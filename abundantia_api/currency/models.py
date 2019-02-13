@@ -24,21 +24,28 @@ class Currency(BaseModel):
         if total_quotations <= 0:
             return 0
 
-        # This is being done this way to increase perfomance.
-        variations = [Decimal(quotation.variation) for quotation in quotation_queryset]
-        total_sum = sum(variations)
+        first_quotation = quotation_queryset.first()
+        last_quotation = quotation_queryset.last()
 
-        total = total_sum / total_quotations
+        first_quotation_amount = Decimal(first_quotation.amount)
+        last_quotation_amount = Decimal(last_quotation.amount)
 
-        return total.quantize(Decimal(".0001"))
+        variation = (last_quotation_amount * 100) / first_quotation_amount
+        variation = variation - 100
+        variation = variation or Decimal(last_quotation.variation)
+        variation = variation.quantize(Decimal(".0001"))
+
+        return variation
 
     def get_last_day_quotation(self):
         now = timezone.now()
         start_day = now.replace(hour=0, minute=0, second=0)
         end_day = now.replace(hour=23, minute=59, second=59)
 
-        quotation_queryset = self.quotations.filter(created__gte=start_day).filter(
-            created__lte=end_day
+        quotation_queryset = (
+            self.quotations.filter(created__gte=start_day)
+            .filter(created__lte=end_day)
+            .order_by("-created")
         )
 
         return self._calculate_quotations_variation(quotation_queryset)
@@ -46,8 +53,10 @@ class Currency(BaseModel):
     def get_last_week_quotation(self):
         start_date = timezone.now() - relativedelta(days=7)
 
-        quotation_queryset = self.quotations.filter(created__gte=start_date).filter(
-            created__lte=timezone.now()
+        quotation_queryset = (
+            self.quotations.filter(created__gte=start_date)
+            .filter(created__lte=timezone.now())
+            .order_by("-created")
         )
 
         return self._calculate_quotations_variation(quotation_queryset)
@@ -55,8 +64,10 @@ class Currency(BaseModel):
     def get_last_month_quotation(self):
         start_date = timezone.now().replace(day=1)
 
-        quotation_queryset = self.quotations.filter(created__gte=start_date).filter(
-            created__lte=timezone.now()
+        quotation_queryset = (
+            self.quotations.filter(created__gte=start_date)
+            .filter(created__lte=timezone.now())
+            .order_by("-created")
         )
 
         return self._calculate_quotations_variation(quotation_queryset)
