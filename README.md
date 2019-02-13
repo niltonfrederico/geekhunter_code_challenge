@@ -1,3 +1,5 @@
+[![CircleCI](https://circleci.com/gh/kuresto/geekhunter_code_challenge.svg?style=svg)](https://circleci.com/gh/kuresto/geekhunter_code_challenge)
+
 # Abundantia API
 
 `Abundantia` was the Roman Godness of abundance and prosperity. This API was developed for a code challenge by Geek Hunter.
