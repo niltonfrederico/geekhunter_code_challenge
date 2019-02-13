@@ -45,8 +45,16 @@ class QuotationAnalyticsSerializer(serializers.ModelSerializer):
         return obj.get_last_month_quotation()
 
 
+class LastThirtyQuotationsReadSerializer(QuotationReadSerializer):
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        queryset = queryset.order_by("-created").limit()[:30]
+
+        return queryset
+
+
 class CurrencyWithQuotationSerializer(BaseReadSerializer):
-    quotations = QuotationReadSerializer(many=True)
+    quotations = LastThirtyQuotationsReadSerializer(many=True)
 
     class Meta:
         model = Currency

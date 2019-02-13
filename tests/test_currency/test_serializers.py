@@ -104,7 +104,7 @@ def test_read_currency_analytics_serializer():
         field_values={
             "amount": 10.5001,
             "variation": 10.1234,
-            "created": timezone.localdate(),
+            "created": timezone.now().replace(hour=0),
         },
         generate_fk=True,
     ).create_one()
